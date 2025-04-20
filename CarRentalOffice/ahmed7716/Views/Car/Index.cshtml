@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ahmed7716.Models.Car>
+
+<h1>Car List</h1>
+
+<a href="@Url.Action("Create", "Car")" class="btn btn-success">Add New Car</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Model</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+
+        {
+            <tr>
+                <td>@car.Name</td>
+                <td>@car.Model</td>
+                <td>@car.Price</td>
+                <td>
+                    <a href="@Url.Action("Details", "Car", new { id = car.Id })">Details</a> |
+                    <a href="@Url.Action("Edit", "Car", new { id = car.Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", "Car", new { id = car.Id })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

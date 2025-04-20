@@ -1,0 +1,129 @@
+﻿/* تنسيق الخلفية */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a; /* خلفية داكنة */
+    color: #fff; /* نص أبيض */
+    margin: 0;
+    padding: 0;
+}
+
+/* عنوان الموقع */
+header h1 {
+    text-align: center;
+    color: #c0c0c0; /* فضي فاتح */
+    font-size: 36px;
+    padding: 20px 0;
+    margin: 0;
+    background-color: #333; /* خلفية داكنة للعناوين */
+}
+
+/* تنسيق الروابط */
+a {
+    color: #c0c0c0; /* فضي */
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #fff; /* تغيير اللون عند التمرير */
+        text-decoration: underline;
+    }
+
+/* تنسيق الجداول */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+    table th, table td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #444; /* حدود خفيفة باللون الرمادي الداكن */
+    }
+
+    table th {
+        background-color: #333; /* خلفية داكنة */
+        color: #c0c0c0; /* نص فضي */
+    }
+
+    table tr:nth-child(even) {
+        background-color: #2a2a2a; /* لون خلفية مختلف للصفوف الزوجية */
+    }
+
+    table tr:nth-child(odd) {
+        background-color: #222; /* لون خلفية مختلف للصفوف الفردية */
+    }
+
+    /* تنسيق النص داخل الجدول */
+    table td {
+        color: #fff; /* تغيير لون النص داخل الخلايا إلى الأبيض */
+    }
+
+        /* تنسيق النص داخل الجدول عند التفاعل مع الخلايا */
+        table td:hover {
+            color: #fff; /* النص يظل أبيض عند التمرير على الخلايا */
+        }
+
+/* تنسيق الأزرار */
+button {
+    background-color: #c0c0c0; /* فضي */
+    color: #1a1a1a; /* لون نص داكن */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+    button:hover {
+        background-color: #a9a9a9; /* تظليل فضي غامق عند التمرير */
+    }
+
+/* تنسيق النموذج (Form) */
+form {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+    form input[type="text"], form input[type="number"], form input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        background-color: #555; /* خلفية داكنة للنموذج */
+        border: 1px solid #444;
+        color: #fff;
+    }
+
+    form input[type="submit"] {
+        background-color: #c0c0c0; /* فضي */
+        border: none;
+        cursor: pointer;
+    }
+
+        form input[type="submit"]:hover {
+            background-color: #a9a9a9; /* تظليل فضي عند التمرير */
+        }
+
+/* تنسيق الروابط في الفوتر */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #c0c0c0;
+}
+
+    footer a {
+        color: #c0c0c0;
+        text-decoration: none;
+    }
+
+        footer a:hover {
+            color: #fff;
+            text-decoration: underline;
+                    
+        }

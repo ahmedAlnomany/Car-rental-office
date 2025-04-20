@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "الصفحة الرئيسية";
+}
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/images/pngtree-car-showroom-lighting-effect-advertising-background-image_2247987.jpg');
+            background-size: cover; /* يجعل الصورة تمتد على كامل الصفحة */
+            background-position: center; /* يضمن تمركز الصورة */
+            background-repeat: no-repeat; /* يمنع تكرار الصورة */
+            color: #fff;
+            height: 100vh; /* يجعل الصفحة تمتد بطول الشاشة */
+            text-align: center;
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* يجعل العناصر متراكمة عموديًا */
+            align-items: center; /* يجعل المحتوى في المنتصف أفقيًا */
+        }
+
+        h1 {
+            margin-top: 50px; /* إبعاد العنوان عن المنتصف */
+            background: rgba(0, 0, 0, 0.6); /* خلفية شفافة للنص */
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .content {
+            flex-grow: 1; /* يدفع المحتوى إلى المنتصف بدون التأثير على العنوان */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* يضع المحتوى في المنتصف */
+            align-items: center;
+            width: 100%;
+        }
+
+        .start-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 20px;
+            color: #1a1a1a;
+            background-color: #c0c0c0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+            .start-btn:hover {
+                background-color: #a9a9a9;
+            }
+    </style>
+</head>
+<body>
+    <h1>مرحبًا بك في نظام تأجير السيارات</h1>
+    <div class="content">
+        <p>اضغط على الزر أدناه للبدء</p>
+        <a href="@Url.Action("Index", "Car")" class="start-btn">ابدأ</a>
+    </div>
+</body>
+</html>
