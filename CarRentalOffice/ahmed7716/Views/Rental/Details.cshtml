@@ -1,32 +1,38 @@
 ﻿@model ahmed7716.Models.Rental
-<h1>Rental Details</h1>
 
-<div>
-    <h3>Rental #@Model.RentalID</h3>
-    
-    <h4>Customer Information</h4>
-    <p><strong>Name:</strong> @Model.customer.Name</p>
-    <p><strong>Phone:</strong> @Model.customer.Phone</p>
-    <p><strong>Email:</strong> @Model.customer.Email</p>
-    <p><strong>Address:</strong> @Model.customer.Adrss</p>
-    <p><strong>License Number:</strong> @Model.customer.LicenseNumber</p>
-    
-    <h4>Car Information</h4>
-    <p><strong>Car:</strong> @Model.car.Name @Model.car.Model</p>
-    <p><strong>Year:</strong> @Model.car.Year</p>
-    <p><strong>Color:</strong> @Model.car.Color</p>
-    <p><strong>Plate Number:</strong> @Model.car.PlateNumberce</p>
-    <p><strong>Status:</strong> @Model.car.Status</p>
-    
-    <h4>Rental Period</h4>
-    <p><strong>Start Date:</strong> @Model.StartDate.ToString("d")</p>
-    <p><strong>End Date:</strong> @Model.EndDate.ToString("d")</p>
-    
-    <h4>Payment</h4>
-    <p><strong>Total Cost:</strong> @Model.TotalCost.ToString("C")</p>
-    <p><strong>Payment Status:</strong> @Model.PaymentStatus</p>
-</div>
+@{
+    ViewData["Title"] = "Rental Details";
+}
 
-<div>
-    <a href="@Url.Action("Index", "Rental")" class="btn btn-secondary">Back to List</a>
+<div class="container">
+    <h2>Rental Details</h2>
+
+    <dl class="row">
+        <dt class="col-sm-2">Customer ID</dt>
+        <dd class="col-sm-10">@Model.CustomerID</dd>
+
+        <dt class="col-sm-2">Car ID</dt>
+        <dd class="col-sm-10">@Model.CarID</dd>
+
+        <dt class="col-sm-2">Start Date</dt>
+        <dd class="col-sm-10">@Model.StartDate.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">End Date</dt>
+        <dd class="col-sm-10">@Model.EndDate.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">Total Cost</dt>
+        <dd class="col-sm-10">@Model.TotalCost</dd>
+
+        <dt class="col-sm-2">Payment Status</dt>
+        <dd class="col-sm-10">@Model.PaymentStatus</dd>
+    </dl>
+
+    <!-- زر Edit (داخلي - يبقى أصفر) -->
+    <a asp-action="Edit" asp-route-id="@Model.RentalID" class="btn btn-warning">
+        <i class="fas fa-edit"></i> Edit
+    </a>
+    <!-- زر Back to List (خارجي - أبيض) -->
+    <a asp-action="Index" class="btn" style="background-color:white;color:black;border:1px solid #ddd">
+        Back to List
+    </a>
 </div>

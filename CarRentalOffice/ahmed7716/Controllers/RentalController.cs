@@ -1,85 +1,102 @@
-﻿using ahmed7716.Repositories;
-using Microsoft.AspNetCore.Http;
+﻿using ahmed7716.Models;
+using ahmed7716.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ahmed7716.Controllers
 {
     public class RentalController : Controller
     {
-        private RentalRepository Repository = new RentalRepository();
-        public ActionResult Index()
+        private RentalRepository rentalRepository = new RentalRepository();
+        private CustomerRepository customerRepository = new CustomerRepository();
+        private CarRepository carRepository = new CarRepository();
+
+        public IActionResult Index()
         {
-           
-            return View(Repository.GetAllRentals());
+            var rentals = rentalRepository.GetAllRentals();
+            return View(rentals);
         }
 
-        // GET: RentalController/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Details(int id)
         {
-            return View(Repository.GetRentalById(id));
+            var rental = rentalRepository.GetRentalById(id);
+            if (rental == null)
+            {
+                return NotFound();
+            }
+            return View(rental);
         }
 
-        // GET: RentalController/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
+            ViewBag.Customers = customerRepository.GetAllCustomers();
+            ViewBag.Cars = carRepository.GetAllCars();
             return View();
         }
 
-        // POST: RentalController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(Rental rental)
         {
-            try
+            if (ModelState.IsValid)
             {
+                rentalRepository.AddRental(rental);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            ViewBag.Customers = customerRepository.GetAllCustomers();
+            ViewBag.Cars = carRepository.GetAllCars();
+            return View(rental);
         }
 
-        // GET: RentalController/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
-            return View();
+            var rental = rentalRepository.GetRentalById(id);
+            if (rental == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Customers = customerRepository.GetAllCustomers();
+            ViewBag.Cars = carRepository.GetAllCars();
+            return View(rental);
         }
 
-        // POST: RentalController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(int id, Rental rental)
         {
-            try
+            if (id != rental.RentalID)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                rentalRepository.UpdateRental(rental);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            ViewBag.Customers = customerRepository.GetAllCustomers();
+            ViewBag.Cars = carRepository.GetAllCars();
+            return View(rental);
         }
 
-        // GET: RentalController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
-            return View();
+            var rental = rentalRepository.GetRentalById(id);
+            if (rental == null)
+            {
+                return NotFound();
+            }
+            return View(rental);
         }
 
-        // POST: RentalController/Delete/5
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult DeleteConfirmed(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            rentalRepository.DeleteRental(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
