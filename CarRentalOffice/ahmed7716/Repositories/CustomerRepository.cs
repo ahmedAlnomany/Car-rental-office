@@ -28,7 +28,11 @@ namespace ahmed7716.Repositories
 
             return customers;
         }
-
+        public Customer GetCustomerById(int id)
+        {
+            var customer = GetAllCustomers().FirstOrDefault(x => x.CustomerID == id);
+            return customer;
+        }
         public int AddCustomer(Customer customer)
         {
             SqlParameter[] parameters = new SqlParameter[]

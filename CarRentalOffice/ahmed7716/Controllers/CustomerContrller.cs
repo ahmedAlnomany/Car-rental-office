@@ -6,8 +6,6 @@ namespace ahmed7716.Controllers
 {
     public class CustomerController : Controller
     {
-        private static List<Customer> _customers = new List<Customer>();
-        private static int _nextId = 1;
         private CustomerRepository repository = new CustomerRepository();
         public IActionResult Index()
         {
@@ -40,14 +38,14 @@ namespace ahmed7716.Controllers
 
         public IActionResult Details(int id)
         {
-            var customer = repository.GetAllCustomers().FirstOrDefault(c => c.CustomerID == id);
+            var customer = repository.GetCustomerById(id);
             if (customer == null) return NotFound();
             return View(customer);
         }
 
         public IActionResult Edit(int id)
         {
-            var customer = repository.GetAllCustomers().FirstOrDefault(c => c.CustomerID == id);
+            var customer = repository.GetCustomerById(id);
             if (customer == null) return NotFound();
             return View(customer);
         }
@@ -59,7 +57,7 @@ namespace ahmed7716.Controllers
             if (id != customer.CustomerID) return NotFound();
             if (ModelState.IsValid)
             {
-                var existing = repository.GetAllCustomers().FirstOrDefault(c => c.CustomerID == id);
+                var existing = repository.GetCustomerById(id);
                 if (existing == null) return NotFound();
                 repository.UpdateCustomer(customer);
                 return RedirectToAction(nameof(Index));
@@ -69,7 +67,7 @@ namespace ahmed7716.Controllers
 
         public IActionResult Delete(int id)
         {
-            var customer = repository.GetAllCustomers().FirstOrDefault(c => c.CustomerID == id);
+            var customer = repository.GetCustomerById(id);
             if (customer == null) return NotFound();
             return View(customer);
         }
@@ -78,7 +76,7 @@ namespace ahmed7716.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var customer = repository.GetAllCustomers().FirstOrDefault(c => c.CustomerID == id);
+            var customer = repository.GetCustomerById(id);
             if (customer == null) return NotFound();
             repository.DeleteCustomer(id);
             return RedirectToAction(nameof(Index));

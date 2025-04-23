@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Rental>
+
+<h1>Rental List</h1>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Create New Rental</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Rental ID</th>
+            <th>Customer</th>
+            <th>Car</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Total Cost</th>
+            <th>Payment Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.RentalID</td>
+                <td>@item.customer.Name</td>
+                <td>@item.car.Name @item.car.Model</td>
+                <td>@item.StartDate.ToString("d")</td>
+                <td>@item.EndDate.ToString("d")</td>
+                <td>@item.TotalCost.ToString("C")</td>
+                <td>@item.PaymentStatus</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.RentalID })" class="btn btn-info btn-sm">Details</a>
+                    <a href="@Url.Action("Edit", new { id = item.RentalID })" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="@Url.Action("Delete", new { id = item.RentalID })" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Back to Home</a>
+</div>

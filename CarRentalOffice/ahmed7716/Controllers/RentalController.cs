@@ -9,13 +9,14 @@ namespace ahmed7716.Controllers
         private RentalRepository Repository = new RentalRepository();
         public ActionResult Index()
         {
-            return View();
+           
+            return View(Repository.GetAllRentals());
         }
 
         // GET: RentalController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(Repository.GetRentalById(id));
         }
 
         // GET: RentalController/Create

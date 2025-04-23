@@ -41,14 +41,14 @@ namespace ahmed7716.Controllers
 
         public IActionResult Details(int id)
         {
-            var car = Repository.GetAllCars().FirstOrDefault(c => c.Id == id);
+            var car = Repository.GetCarById(id);
             if (car == null) return NotFound();
             return View(car);
         }
 
         public IActionResult Edit(int id)
         {
-            var car = Repository.GetAllCars().FirstOrDefault(c => c.Id == id);
+            var car = Repository.GetCarById(id);
             if (car == null)
             {
                 return NotFound();
@@ -63,20 +63,17 @@ namespace ahmed7716.Controllers
             if (id != car.Id) return NotFound();
             if (ModelState.IsValid)
             {
-                var carToUpdate = Repository.GetAllCars().FirstOrDefault(c => c.Id == id);
+                var carToUpdate = Repository.GetCarById(id);
                 if (carToUpdate == null) return NotFound();
                 Repository.UpdateCar(car);
-                return RedirectToAction(nameof(Index));
-                
-                
-                               
+                return RedirectToAction(nameof(Index));        
             }
             return View(car);
         }
 
         public IActionResult Delete(int id)
         {
-            var car = Repository.GetAllCars().FirstOrDefault(c => c.Id == id);
+            var car = Repository.GetCarById(id);
             if (car == null) return NotFound();
             return View(car); 
         }
@@ -85,7 +82,7 @@ namespace ahmed7716.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var car = Repository.GetAllCars().FirstOrDefault(c => c.Id == id);
+            var car = Repository.GetCarById(id);
             if (car == null) return NotFound();
 
             Repository.DeleteCar(id);

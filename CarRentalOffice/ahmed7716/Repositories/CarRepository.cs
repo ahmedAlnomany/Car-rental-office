@@ -28,6 +28,11 @@ namespace ahmed7716.Repositories
 
             return cars;
         }
+        public Car GetCarById(int id)
+        {
+            var car = GetAllCars().FirstOrDefault(x=>x.Id==id);
+            return car;
+        }
 
         public int AddCar(Car car)
         {

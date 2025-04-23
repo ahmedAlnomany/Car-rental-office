@@ -11,7 +11,8 @@ namespace ahmed7716.Repositories
         {
             List<Rental> rentals = new List<Rental>();
             DataTable dataTable = DBHelper.ExecuteTableFunction("GetAllRentals");
-
+            CarRepository carRepository = new CarRepository();
+            CustomerRepository customerRepository = new CustomerRepository();
             foreach (DataRow row in dataTable.Rows)
             {
                 rentals.Add(new Rental
@@ -22,13 +23,21 @@ namespace ahmed7716.Repositories
                     StartDate = Convert.ToDateTime(row["StartDate"]),
                     EndDate = Convert.ToDateTime(row["EndDate"]),
                     TotalCost = Convert.ToDecimal(row["TotalCost"]),
-                    PaymentStatus = row["PaymentStatus"].ToString()
+                    PaymentStatus = row["PaymentStatus"].ToString(),
+                    car = carRepository.GetCarById(Convert.ToInt32(row["CarID"])),
+                    customer = customerRepository.GetCustomerById(Convert.ToInt32(row["CustomerID"]))
+
+
                 });
             }
 
             return rentals;
         }
-
+        public Rental GetRentalById(int id)
+        {
+           var RentaledCar=GetAllRentals().FirstOrDefault(x=>x.RentalID==id);
+            return RentaledCar;
+        }
         public int AddRental(Rental rental)
         {
             SqlParameter[] parameters = new SqlParameter[]
