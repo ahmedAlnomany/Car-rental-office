@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ahmed7716.Models;
 using System.Linq;
+using ahmed7716.Repositories;
+using System.Diagnostics.Eventing.Reader;
 
 namespace ahmed7716.Controllers
 {
     public class CarController : Controller
     {
-        private static List<Car> _cars = new List<Car>();
-        private static int _nextId = 1;
-
+        private CarRepository Repository = new CarRepository();
         public IActionResult Index()
         {
-            return View(_cars);
+            return View(Repository.GetAllCars());
         }
 
         public IActionResult Create()
@@ -25,23 +25,30 @@ namespace ahmed7716.Controllers
         {
             if (ModelState.IsValid)
             {
-                car.Id = _nextId++;
-                _cars.Add(car);
-                return RedirectToAction(nameof(Index));
+                var addedCarId = Repository.AddCar(car);
+                if (addedCarId!=0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    throw new Exception("something wrong");
+                }
+                
             }
             return View(car);
         }
 
         public IActionResult Details(int id)
         {
-            var car = _cars.FirstOrDefault(c => c.Id == id);
+            var car = Repository.GetAllCars().FirstOrDefault(c => c.Id == id);
             if (car == null) return NotFound();
             return View(car);
         }
 
         public IActionResult Edit(int id)
         {
-            var car = _cars.FirstOrDefault(c => c.Id == id);
+            var car = Repository.GetAllCars().FirstOrDefault(c => c.Id == id);
             if (car == null)
             {
                 return NotFound();
@@ -56,21 +63,20 @@ namespace ahmed7716.Controllers
             if (id != car.Id) return NotFound();
             if (ModelState.IsValid)
             {
-                var carToUpdate = _cars.FirstOrDefault(c => c.Id == id);
+                var carToUpdate = Repository.GetAllCars().FirstOrDefault(c => c.Id == id);
                 if (carToUpdate == null) return NotFound();
-
-                carToUpdate.Name = car.Name;
-                carToUpdate.Model = car.Model;
-                carToUpdate.Price = car.Price;
-
+                Repository.UpdateCar(car);
                 return RedirectToAction(nameof(Index));
+                
+                
+                               
             }
             return View(car);
         }
 
         public IActionResult Delete(int id)
         {
-            var car = _cars.FirstOrDefault(c => c.Id == id);
+            var car = Repository.GetAllCars().FirstOrDefault(c => c.Id == id);
             if (car == null) return NotFound();
             return View(car); 
         }
@@ -79,11 +85,11 @@ namespace ahmed7716.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var car = _cars.FirstOrDefault(c => c.Id == id);
+            var car = Repository.GetAllCars().FirstOrDefault(c => c.Id == id);
             if (car == null) return NotFound();
 
-            _cars.Remove(car); 
-            return RedirectToAction(nameof(Index)); 
-        }
+            Repository.DeleteCar(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

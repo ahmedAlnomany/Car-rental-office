@@ -1,79 +1,78 @@
-﻿//using ahmed7716.Helpers;
-//using ahmed7716.Models;
-//using System.Data;
-//using System.Data.SqlClient;
+﻿using ahmed7716.Helpers;
+using ahmed7716.Models;
+using System.Data;
+using System.Data.SqlClient;
 
-//namespace ahmed7716.Repositories
-//{
-//    public class CarRepository
-//    {
-//        public List<Car> GetAllCars()
-//        {
-//            List<Car> cars = new List<Car>();
-//            DataTable dataTable = DBHelper.ExecuteTableFunction("GetAllCars");
+namespace ahmed7716.Repositories
+{
+    public class CarRepository
+    {
+        public List<Car> GetAllCars()
+        {
+            List<Car> cars = new List<Car>();
+            DataTable dataTable = DBHelper.ExecuteTableFunction("GetAllCars");
 
-//            foreach (DataRow row in dataTable.Rows)
-//            {
-//                cars.Add(new Car
-//                {
-//                    Id = Convert.ToInt32(row["CarID"]),
-//                    Name = row["Make"].ToString(),
-//                    Model = row["Model"].ToString(),
-//                    Year = Convert.ToInt32(row["Year"]),
-//                    Color = row["Color"].ToString(),
-//                    PlateNumber = row["PlateNumber"].ToString(),
-//                    Status = row["Status"].ToString()
-//                });
-//            }
+            foreach (DataRow row in dataTable.Rows)
+            {
+                cars.Add(new Car
+                {
+                    Id = Convert.ToInt32(row["CarID"]),
+                    Name = row["Make"].ToString(),
+                    Model = row["Model"].ToString(),
+                    Year = Convert.ToInt32(row["Year"]),
+                    Color = row["Color"].ToString(),
+                    PlateNumberce = row["PlateNumber"].ToString(),
+                    Status = row["Status"].ToString()
+                });
+            }
 
-//            return cars;
-//        }
+            return cars;
+        }
 
-//        public int AddCar(Car car)
-//        {
-//            SqlParameter[] parameters = new SqlParameter[]
-//            {
-//            new SqlParameter("@Make", car.Name),
-//            new SqlParameter("@Model", car.Model),
-//            new SqlParameter("@Year", car.Year),
-//            new SqlParameter("@Color", car.Color),
-//            new SqlParameter("@PlateNumber", car.PlateNumber),
-//            new SqlParameter("@Status", car.Status)
-//            };
+        public int AddCar(Car car)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+            new SqlParameter("@Make", car.Name),
+            new SqlParameter("@Model", car.Model),
+            new SqlParameter("@Year", car.Year),
+            new SqlParameter("@Color", car.Color),
+            new SqlParameter("@PlateNumber", car.PlateNumberce),
+            new SqlParameter("@Status", car.Status)
+            };
 
-//            DBHelper.ExecuteStoredProcedure("AddCar", parameters);
+            DBHelper.ExecuteStoredProcedure("AddCar", parameters);
 
-//            // للحصول على آخر ID تم إدخاله
-//            DataTable dt = DBHelper.ExecuteQuery("SELECT SCOPE_IDENTITY() AS NewID");
-//            return Convert.ToInt32(dt.Rows[0]["NewID"]);
-//        }
+            DataTable dt = DBHelper.ExecuteQuery("SELECT SCOPE_IDENTITY() AS NewID");
+            return Convert.ToInt32(dt.Rows[0]["NewID"]);
+        }
 
-//        public bool UpdateCar(Car car)
-//        {
-//            SqlParameter[] parameters = new SqlParameter[]
-//            {
-//            new SqlParameter("@CarID", car.Id),
-//            new SqlParameter("@Make", car.Name),
-//            new SqlParameter("@Model", car.Model),
-//            new SqlParameter("@Year", car.Year),
-//            new SqlParameter("@Color", car.Color),
-//            new SqlParameter("@PlateNumber", car.PlateNumber),
-//            new SqlParameter("@Status", car.Status)
-//            };
+        public bool UpdateCar(Car car)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+            new SqlParameter("@CarID", car.Id),
+            new SqlParameter("@Make", car.Name),
+            new SqlParameter("@Model", car.Model),
+            new SqlParameter("@Year", car.Year),
+            new SqlParameter("@Color", car.Color),
+            new SqlParameter("@PlateNumber", car.PlateNumberce),
+            new SqlParameter("@Status", car.Status)
+            };
 
-//            int rowsAffected = DBHelper.ExecuteStoredProcedure("UpdateCar", parameters).Rows.Count;
-//            return rowsAffected > 0;
-//        }
+            int rowsAffected = DBHelper.ExecuteStoredProcedure("UpdateCar", parameters).Rows.Count;
+            return rowsAffected > 0;
+        }
 
-//        public bool DeleteCar(int id)
-//        {
-//            SqlParameter[] parameters = new SqlParameter[]
-//            {
-//            new SqlParameter("@CarID", id)
-//            };
+        public bool DeleteCar(int id)
+        {
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+            new SqlParameter("@CarID", id)
+            };
 
-//            int rowsAffected = DBHelper.ExecuteStoredProcedure("DeleteCar", parameters).Rows.Count;
-//            return rowsAffected > 0;
-//        }
-//    }
-//}
+            int rowsAffected = DBHelper.ExecuteStoredProcedure("DeleteCar", parameters).Rows.Count;
+            return rowsAffected > 0;
+        }
+    }
+}

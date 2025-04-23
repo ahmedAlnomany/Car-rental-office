@@ -7,7 +7,19 @@ namespace ahmed7716.Controllers
 {
     public class EmployeeController : Controller
     {
-        private static List<Employee> _employees = new List<Employee>();
+        private static List<Employee> _employees = new List<Employee>()
+        {
+            new Employee
+            {
+                EmployeeID = 1,
+                Address="jsdlfd",
+                Email = "sdfsd",
+                Name = "sasas",
+                Phone = "sdsdsdds",
+                Position = "sdsdsdds"
+
+            }
+        };
         private static int _nextId = 1;
 
         public IActionResult Index()

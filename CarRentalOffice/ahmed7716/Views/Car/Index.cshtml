@@ -11,6 +11,10 @@
             <th>Name</th>
             <th>Model</th>
             <th>Price</th>
+            <th>Year</th>
+            <th>Color</th>
+            <th>PlateNumberce</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -22,6 +26,11 @@
                 <td>@car.Name</td>
                 <td>@car.Model</td>
                 <td>@car.Price</td>
+                <td>@car.Year</td>
+                <td>@car.Color</td>
+                <td>@car.PlateNumberce</td>
+                <td>@car.Status</td>
+
                 <td>
                     <a asp-action="Details" asp-route-id="@car.Id">Details</a> |
                     <a asp-action="Edit" asp-route-id="@car.Id">Edit</a> |

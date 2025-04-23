@@ -6,7 +6,7 @@ namespace ahmed7716.Helpers
 
     public class DBHelper
     {
-        private static string connectionString = @"Data Source=FMSI\SQLEXPRESS;Initial Catalog=CarRentalOffice;Integrated Security=True;";
+        private static string connectionString = @"Data Source=AHMED;Initial Catalog=CarRentalOffice;Integrated Security=True;";
 
         public static SqlConnection GetConnection()
         {
@@ -109,7 +109,7 @@ namespace ahmed7716.Helpers
             }
             catch (Exception ex)
             {
-                // Log the exception
+          
                 throw;
             }
             finally
