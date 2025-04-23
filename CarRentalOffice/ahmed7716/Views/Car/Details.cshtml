@@ -3,8 +3,11 @@
 <h1>Car Details</h1>
 
 <div>
-    <h4>@Model.Name</h4>
+    <h3>@Model.Name</h3>
     <p><strong>Model:</strong> @Model.Model</p>
     <p><strong>Price:</strong> @Model.Price</p>
 </div>
 
+<div>
+    <a href="@Url.Action("Index", "Car")" class="btn btn-secondary">Back to List</a>
+</div>

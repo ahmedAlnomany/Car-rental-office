@@ -1,26 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ahmed7716.Models; 
+using ahmed7716.Models;
+using System.Linq;
 
 namespace ahmed7716.Controllers
 {
     public class CarController : Controller
     {
-        private static List<Car> _cars = new List<Car>(); 
-        private static int _nextId = 1; 
+        private static List<Car> _cars = new List<Car>();
+        private static int _nextId = 1;
 
-        
         public IActionResult Index()
         {
             return View(_cars);
         }
 
-        
         public IActionResult Create()
         {
             return View();
         }
 
-        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Car car)
@@ -28,13 +26,12 @@ namespace ahmed7716.Controllers
             if (ModelState.IsValid)
             {
                 car.Id = _nextId++;
-                _cars.Add(car); 
-                return RedirectToAction(nameof(Index)); 
+                _cars.Add(car);
+                return RedirectToAction(nameof(Index));
             }
-            return View(car); 
+            return View(car);
         }
 
-        
         public IActionResult Details(int id)
         {
             var car = _cars.FirstOrDefault(c => c.Id == id);
@@ -42,7 +39,6 @@ namespace ahmed7716.Controllers
             return View(car);
         }
 
-        
         public IActionResult Edit(int id)
         {
             var car = _cars.FirstOrDefault(c => c.Id == id);
@@ -53,7 +49,6 @@ namespace ahmed7716.Controllers
             return View(car);
         }
 
-        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Car car)
@@ -68,17 +63,16 @@ namespace ahmed7716.Controllers
                 carToUpdate.Model = car.Model;
                 carToUpdate.Price = car.Price;
 
-                return RedirectToAction(nameof(Index)); 
+                return RedirectToAction(nameof(Index));
             }
-            return View(car); 
+            return View(car);
         }
 
-        
         public IActionResult Delete(int id)
         {
             var car = _cars.FirstOrDefault(c => c.Id == id);
             if (car == null) return NotFound();
-            return View(car);
+            return View(car); 
         }
 
         [HttpPost, ActionName("Delete")]

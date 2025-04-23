@@ -1,0 +1,19 @@
+﻿@model ahmed7716.Models.Customer
+
+<h2>Delete Customer</h2>
+
+<h4>Are you sure you want to delete this customer?</h4>
+
+<div>
+    <p><strong>Name:</strong> @Model.Name</p>
+    <p><strong>Phone:</strong> @Model.Phone</p>
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Address:</strong> @Model.Adrss</p>
+    <p><strong>License Number:</strong> @Model.LicenseNumber</p>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="CustomerID" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

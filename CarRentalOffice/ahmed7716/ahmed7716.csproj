@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="C:\Users\extra\Desktop\ahmed najeeb.cs" Link="ahmed najeeb.cs" />
+    <Compile Include="C:\Users\extra\Desktop\Car.cs" Link="Car.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

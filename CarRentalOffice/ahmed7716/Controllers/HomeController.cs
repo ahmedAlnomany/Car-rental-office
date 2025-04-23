@@ -8,5 +8,10 @@ namespace ahmed7716.Controllers
         {
             return View();
         }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
     }
 }

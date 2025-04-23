@@ -1,12 +1,13 @@
-﻿@model IEnumerable<ahmed7716.Models.Car>
+﻿@model List<ahmed7716.Models.Car>
 
-<h1>Car List</h1>
+<h2>Car List</h2>
 
-<a href="@Url.Action("Create", "Car")" class="btn btn-success">Add New Car</a>
+<a asp-action="Create" class="btn btn-primary mb-3">Add Car</a>
 
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
+            <th>Car ID</th>
             <th>Name</th>
             <th>Model</th>
             <th>Price</th>
@@ -15,16 +16,16 @@
     </thead>
     <tbody>
         @foreach (var car in Model)
-
         {
             <tr>
+                <td>@car.Id</td>
                 <td>@car.Name</td>
                 <td>@car.Model</td>
                 <td>@car.Price</td>
                 <td>
-                    <a href="@Url.Action("Details", "Car", new { id = car.Id })">Details</a> |
-                    <a href="@Url.Action("Edit", "Car", new { id = car.Id })">Edit</a> |
-                    <a href="@Url.Action("Delete", "Car", new { id = car.Id })">Delete</a>
+                    <a asp-action="Details" asp-route-id="@car.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@car.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@car.Id">Delete</a>
                 </td>
             </tr>
         }
