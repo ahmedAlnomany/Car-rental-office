@@ -35,7 +35,7 @@ namespace ahmed7716.Repositories
         }
         public Rental GetRentalById(int id)
         {
-           var RentaledCar=GetAllRentals().FirstOrDefault(x=>x.RentalID==id);
+            var RentaledCar = GetAllRentals().FirstOrDefault(x => x.RentalID == id);
             return RentaledCar;
         }
         public int AddRental(Rental rental)
@@ -52,8 +52,8 @@ namespace ahmed7716.Repositories
 
             DBHelper.ExecuteStoredProcedure("AddRental", parameters);
 
-            DataTable dt = DBHelper.ExecuteQuery("SELECT SCOPE_IDENTITY() AS NewID");
-            return Convert.ToInt32(dt.Rows[0]["NewID"]);
+
+            return 1;
         }
 
         public bool UpdateRental(Rental rental)

@@ -46,8 +46,7 @@ namespace ahmed7716.Repositories
 
             DBHelper.ExecuteStoredProcedure("AddCustomer", parameters);
 
-            DataTable dt = DBHelper.ExecuteQuery("SELECT SCOPE_IDENTITY() AS NewID");
-            return Convert.ToInt32(dt.Rows[0]["NewID"]);
+            return 1;
         }
 
         public bool UpdateCustomer(Customer customer)

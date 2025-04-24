@@ -7,13 +7,9 @@ namespace ahmed7716.Controllers
     public class RentalController : Controller
     {
         private RentalRepository rentalRepository = new RentalRepository();
-        private CustomerRepository customerRepository = new CustomerRepository();
-        private CarRepository carRepository = new CarRepository();
-
         public IActionResult Index()
         {
-            var rentals = rentalRepository.GetAllRentals();
-            return View(rentals);
+            return View(rentalRepository.GetAllRentals());
         }
 
         public IActionResult Details(int id)
@@ -28,8 +24,7 @@ namespace ahmed7716.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.Customers = customerRepository.GetAllCustomers();
-            ViewBag.Cars = carRepository.GetAllCars();
+
             return View();
         }
 
@@ -37,15 +32,10 @@ namespace ahmed7716.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Rental rental)
         {
-            if (ModelState.IsValid)
-            {
-                rentalRepository.AddRental(rental);
-                return RedirectToAction(nameof(Index));
-            }
 
-            ViewBag.Customers = customerRepository.GetAllCustomers();
-            ViewBag.Cars = carRepository.GetAllCars();
-            return View(rental);
+            rentalRepository.AddRental(rental);
+            return RedirectToAction(nameof(Index));
+
         }
 
         public IActionResult Edit(int id)
@@ -56,8 +46,6 @@ namespace ahmed7716.Controllers
                 return NotFound();
             }
 
-            ViewBag.Customers = customerRepository.GetAllCustomers();
-            ViewBag.Cars = carRepository.GetAllCars();
             return View(rental);
         }
 
@@ -70,15 +58,10 @@ namespace ahmed7716.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                rentalRepository.UpdateRental(rental);
-                return RedirectToAction(nameof(Index));
-            }
 
-            ViewBag.Customers = customerRepository.GetAllCustomers();
-            ViewBag.Cars = carRepository.GetAllCars();
-            return View(rental);
+            rentalRepository.UpdateRental(rental);
+            return RedirectToAction(nameof(Index));
+
         }
 
         public IActionResult Delete(int id)
@@ -95,8 +78,17 @@ namespace ahmed7716.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            rentalRepository.DeleteRental(id);
-            return RedirectToAction(nameof(Index));
+            var Exitedrental = rentalRepository.GetRentalById(id);
+            if (Exitedrental != null)
+            {
+                rentalRepository.DeleteRental(id);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
     }
 }

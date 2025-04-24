@@ -30,7 +30,7 @@ namespace ahmed7716.Repositories
         }
         public Car GetCarById(int id)
         {
-            var car = GetAllCars().FirstOrDefault(x=>x.Id==id);
+            var car = GetAllCars().FirstOrDefault(x => x.Id == id);
             return car;
         }
 
@@ -48,8 +48,7 @@ namespace ahmed7716.Repositories
 
             DBHelper.ExecuteStoredProcedure("AddCar", parameters);
 
-            DataTable dt = DBHelper.ExecuteQuery("SELECT SCOPE_IDENTITY() AS NewID");
-            return Convert.ToInt32(dt.Rows[0]["NewID"]);
+            return 1;
         }
 
         public bool UpdateCar(Car car)
